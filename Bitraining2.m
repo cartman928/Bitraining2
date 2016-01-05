@@ -10,7 +10,7 @@ w2 = 1;
 n0 = 10^(-2);    %noise variance
 
 iternums = 1:2; % number of iterations
-N_realization = 500; % Number of times to run simulation
+N_realization = 1; % Number of times to run simulation
 
 averagerateu = zeros(N_realization, length(iternums));
 averageratem = zeros(N_realization, length(iternums));
@@ -53,7 +53,7 @@ for realization_idx = 1 : N_realization
         
         %% bi-directional training
             %%Backward Training: sudo-LS Algorithm
-            [v11, v12] = S_LS_User1(H11, H12, H21, H22, g1, g2, v21, v22, M, n0, x1_b, x2_b, w1, w2); 
+            [v11, v12] = S_LS_User1_Brutal(H11, H12, H21, H22, g1, g2, v21, v22, M, n0, x1_b, x2_b, w1, w2); 
             %[v21, v22] = S_LS_User2(H11, H12, H21, H22, g1, g2, v11, v12, M, n0, x1_b, x2_b, w1, w2); 
 
             %%Forward Training: LS Algorithm
