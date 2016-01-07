@@ -7,16 +7,16 @@ alpha = 0;    %coefficient for block fading model
 beta = 0.8^2;  % Attenuation loss from non-direct antennas
 w1 = 1;
 w2 = 1;
-n0 = 10^(-3);    %noise variance
+n0 = 10^(-2);    %noise variance
 
 iternums = 1:10; % number of iterations
-N_realization = 100; % Number of times to run simulation
+N_realization = 500; % Number of times to run simulation
 
 C1 = zeros(N_realization, length(iternums));
 C2 = zeros(N_realization, length(iternums));
 
 %% Training Length
-for traininglength = [10 20] % traininglength 2M
+for traininglength = [10 20 30] % traininglength 2M
         traininglength
 %% Start Loop
 for realization_idx = 1 : N_realization
@@ -82,9 +82,12 @@ end
 
 %% Plot C(bits/channel)
 figure
-subplot(2,1,1);
 hold on
 
 p1=plot(iternums, mean(C1(:,:,10))+mean(C2(:,:,10)),'--');
-p2=plot(iternums, mean(C2(:,:,20))+mean(C2(:,:,20)));
+p2=plot(iternums, mean(C2(:,:,20))+mean(C2(:,:,20)),'o');
+p3=plot(iternums, mean(C1(:,:,30))+mean(C2(:,:,30)));
+
+
+axis([1 numiters 0 12])
 
