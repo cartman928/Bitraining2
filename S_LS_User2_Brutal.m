@@ -16,9 +16,9 @@ function  [v21, v22] = S_LS_User2_Brutal(H11, H12, H21, H22, g1, g2, v11_old, v1
 
 
     %brutal-force search for lambda1 
-    Range = 1000;
-    Precision = 0.01;
-    for n = -Range:Range
+    Range = 100000;
+    Precision = 0.0001;
+    for n = 1:Range
 
         v21 = ( 2*Ex1y2*Ex1y2'*w1 + 2*Ex2y2*Ex2y2'*w2 + 2*(n'*Precision)*eye(2))\...
           ( 2*Ex1y2*w1 - Ex1y1'*v11_old*Ex1y2*w1...
@@ -32,11 +32,13 @@ function  [v21, v22] = S_LS_User2_Brutal(H11, H12, H21, H22, g1, g2, v11_old, v1
             -Ex2y1'*v12_old*Ex2y2*w2...
             -Ex2y2*v12_old'*Ex2y1*w2);
 
-        W(n+1+Range) = abs(norm(v11_old)^2+norm(v12_old)^2-P);
+        W(n) = abs(norm(v11_old)^2+norm(v12_old)^2-P);
     end
+    plot(W);
+    axis([1 100000 0 20]);
     
     [M,I] = min(W);
-    lambda2 = (I-1-Range)*Precision;
+    lambda2 = I*Range*Precision;
     
     v21 = ( 2*Ex1y1*Ex1y1'*w1 + 2*Ex2y1*Ex2y1'*w2 + 2*lambda2'*eye(2))\...
           ( 2*Ex1y1*w1 - Ex1y2'*v21*Ex1y1*w1...

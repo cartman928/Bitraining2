@@ -54,7 +54,9 @@ for realization_idx = 1 : N_realization
             for k1 = 1 : 20
             [v11, v12] = S_LS_User1_Brutal(H11, H12, H21, H22, g1, g2, v21, v22, M, n0, N1, N2, x1_b, x2_b, w1, w2);
             [v21, v22] = S_LS_User2_Brutal(H11, H12, H21, H22, g1, g2, v11, v12, M, n0, N1, N2, x1_b, x2_b, w1, w2); 
-            %norm(v11)^2+norm(v12)^2
+            %[v11, v12]
+            norm(v11)^2+norm(v12)^2
+            norm(v21)^2+norm(v22)^2
             end
 
 
